@@ -7,18 +7,21 @@ import (
 	"os"
 
 	"github.com/codevibe-de/goadv--orders/internal/api"
+	"github.com/codevibe-de/goadv--orders/internal/config"
 )
 
 func main() {
-	addr := flag.String("addr", ":8080", "HTTP Network Port")
+	c := config.Config{}
+	flag.StringVar(&c.OrdersAddr, "orders-addr", ":8080", "HTTP Addr for Orders Service")
+	flag.StringVar(&c.CustomersAddr, "customer-addr", ":8181", "HTTP Addr for Customers Service")
 	flag.Parse()
 
 	logHandler := slog.NewTextHandler(os.Stdout, nil)
-	logger := slog.New(logHandler)
+	c.Logger = slog.New(logHandler)
 
 	// Setup Server
-	logger.Info("Server starting", "addr", *addr)
-	err := http.ListenAndServe(*addr, api.Routes(logger))
-	logger.Error("Encountered unrecoverable Server Error", "err", err.Error())
+	c.Logger.Info("Server starting", "addr", c.OrdersAddr)
+	err := http.ListenAndServe(c.OrdersAddr, api.Routes(c))
+	c.Logger.Error("Encountered unrecoverable Server Error", "err", err.Error())
 	os.Exit(1)
 }
