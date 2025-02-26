@@ -14,6 +14,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// #TODO:
+// http://ordersvc.tld/placeOrder
+// http://customer.tld/createCustomer
+// http://customer.tld/getCustomers
+// http://customer.tld/getCustomerByPhoneNumber
+
 func TestPlaceOrdersHandler(t *testing.T) {
 	// Create a new logger
 	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{}))
