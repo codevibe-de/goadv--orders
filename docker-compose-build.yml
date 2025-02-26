@@ -1,0 +1,6 @@
+services:
+  app:
+    build: .
+    image: registry.gitlab.com/codevibe-de/db-training/order-service:${VERSION}
+    ports:
+      - "8081:80"
