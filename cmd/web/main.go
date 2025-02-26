@@ -21,7 +21,7 @@ func main() {
 
 	// Setup Server
 	c.Logger.Info("Server starting", "addr", c.OrdersAddr)
-	err := http.ListenAndServe(c.OrdersAddr, api.Routes(c))
+	err := http.ListenAndServe(c.OrdersAddr, api.Routes(&c))
 	c.Logger.Error("Encountered unrecoverable Server Error", "err", err.Error())
 	os.Exit(1)
 }
