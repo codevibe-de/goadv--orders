@@ -9,7 +9,7 @@ RUN go mod download
 
 # Then copy sources and compile
 COPY . ./
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o goadv-orders cmd/dummy/dummy.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o goadv-orders cmd/web/main.go
 
 # Stage 2: Create a lightweight final image.....
 FROM alpine:latest AS runner
